@@ -9,8 +9,8 @@ from django.db import models
 
 
 class Posts(models.Model):
-    user = models.ForeignKey('Users', models.DO_NOTHING, blank=True, null=True)
-    university = models.ForeignKey('Universities', models.DO_NOTHING, blank=True, null=True)
+    user = models.ForeignKey('users.Users', models.DO_NOTHING, blank=True, null=True)
+    university = models.ForeignKey('universities.Universities', models.DO_NOTHING, blank=True, null=True)
     content = models.TextField()
     created_at = models.DateTimeField(blank=True, null=True)
 
@@ -20,7 +20,6 @@ class Posts(models.Model):
 
 
 class PostTags(models.Model):
-    pk = models.CompositePrimaryKey('post_id', 'tag_id')
     post = models.ForeignKey(Posts, models.DO_NOTHING)
     tag = models.ForeignKey('Tags', models.DO_NOTHING)
 

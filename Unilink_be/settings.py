@@ -13,7 +13,6 @@ import os
 from pathlib import Path
 from dotenv import load_dotenv
 from urllib.parse import urlparse
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -27,7 +26,7 @@ SECRET_KEY = 'django-insecure-s72&@fnhpb!l_5f$5#^z%hrq&d#0@eskdbkk7inl*799z@(!_n
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
 
 # Application definition
@@ -47,6 +46,9 @@ INSTALLED_APPS = [
     'apps.relationships',
     'apps.caching',
 ]
+
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'
+SESSION_COOKIE_SECURE = False
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -86,6 +88,19 @@ load_dotenv()
 
 # Replace the DATABASES section of your settings.py with this
 tmpPostgres = urlparse(os.getenv("DATABASE_URL"))
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': { 'class': 'logging.StreamHandler' },
+    },
+    'root': {
+        'handlers': ['console'],
+        'level': 'DEBUG',
+    },
+}
+
 
 DATABASES = {
     'default': {
@@ -139,3 +154,9 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+AUTH_USER_MODEL = 'users.Users'
+
+AUTHENTICATION_BACKENDS = [
+    'apps.users.backends.EmailBackend',
+]
