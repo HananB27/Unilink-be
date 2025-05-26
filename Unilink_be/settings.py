@@ -39,7 +39,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'Unilink_be'
+    'Unilink_be',
+    'apps.core',
+    'apps.users',
+    'apps.posts',
+    'apps.universities',
+    'apps.relationships',
+    'apps.caching',
 ]
 
 MIDDLEWARE = [
