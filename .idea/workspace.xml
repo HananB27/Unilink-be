@@ -4,50 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="78c6d013-6d55-4d8c-ac1e-fdbb8eb7f529" name="Changes" comment="Remove env">
-      <change beforePath="$PROJECT_DIR$/Unilink_be/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/Unilink_be/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/caching/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/caching/admin.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/caching/apps.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/caching/migrations/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/caching/models.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/caching/tests.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/caching/views.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/admin.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/apps.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/migrations/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/models.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/tests.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/views.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/posts/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/posts/admin.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/posts/apps.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/posts/migrations/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/posts/models.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/posts/tests.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/posts/views.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/relationships/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/relationships/admin.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/relationships/apps.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/relationships/migrations/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/relationships/models.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/relationships/tests.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/relationships/views.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/universities/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/universities/admin.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/universities/apps.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/universities/migrations/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/universities/models.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/universities/tests.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/universities/views.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/admin.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/apps.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/migrations/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/models.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/tests.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/views.py" beforeDir="false" />
+    <list default="true" id="78c6d013-6d55-4d8c-ac1e-fdbb8eb7f529" name="Changes" comment="Remove env and reconstruct architecture">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Unilink_be/models.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/caching/apps.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/caching/apps.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/core/apps.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/core/apps.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/posts/apps.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/posts/apps.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/relationships/apps.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/relationships/apps.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/universities/apps.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/universities/apps.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/users/apps.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/users/apps.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/users/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/users/models.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -134,7 +100,7 @@
       <option name="presentableId" value="Default" />
       <updated>1748253544887</updated>
       <workItem from="1748253545917" duration="2085000" />
-      <workItem from="1748259496501" duration="1028000" />
+      <workItem from="1748259496501" duration="1960000" />
     </task>
     <task id="LOCAL-00001" summary="Init">
       <option name="closed" value="true" />
@@ -168,7 +134,15 @@
       <option name="project" value="LOCAL" />
       <updated>1748260488054</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Remove env and reconstruct architecture">
+      <option name="closed" value="true" />
+      <created>1748260573739</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1748260573739</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -179,6 +153,7 @@
     <MESSAGE value="Add unversioned" />
     <MESSAGE value="Connect to db" />
     <MESSAGE value="Remove env" />
-    <option name="LAST_COMMIT_MESSAGE" value="Remove env" />
+    <MESSAGE value="Remove env and reconstruct architecture" />
+    <option name="LAST_COMMIT_MESSAGE" value="Remove env and reconstruct architecture" />
   </component>
 </project>
