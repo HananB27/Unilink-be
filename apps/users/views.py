@@ -4,6 +4,8 @@ from django.contrib.auth import login, authenticate, logout, get_user_model
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 
+from db.graph.graph_models import User as UserNode
+
 User = get_user_model()
 
 # Create your views here.
@@ -26,6 +28,10 @@ def signup(request):
 
             if User.objects.filter(email=email).exists():
                 return JsonResponse({'error': 'Email already in use'}, status=400)
+            try:
+                UserNode(email=email, name=f"{first_name} {last_name}".strip()).save()
+            except Exception as graph_error:
+                return JsonResponse({'error': f'Neo4j error: {str(graph_error)}'}, status=500)
 
             user = User.objects.create_user(
                 email=email,
@@ -34,6 +40,8 @@ def signup(request):
                 last_name=last_name or '',
                 password=password
             )
+
+
             return JsonResponse({'message': 'User created successfully'}, status=201)
         except Exception as e:
             return JsonResponse({'error': str(e)}, status=500)

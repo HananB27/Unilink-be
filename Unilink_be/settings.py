@@ -13,6 +13,8 @@ import os
 from pathlib import Path
 from dotenv import load_dotenv
 from urllib.parse import urlparse
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -160,3 +162,5 @@ AUTH_USER_MODEL = 'users.Users'
 AUTHENTICATION_BACKENDS = [
     'apps.users.backends.EmailBackend',
 ]
+
+NEOMODEL_NEO4J_BOLT_URL = f"neo4j+s://{os.getenv('NEO4J_USERNAME')}:{os.getenv('NEO4J_PASSWORD')}@{os.getenv('NEO4J_URI').replace('neo4j+s://', '')}"
