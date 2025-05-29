@@ -164,3 +164,6 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 NEOMODEL_NEO4J_BOLT_URL = f"neo4j+s://{os.getenv('NEO4J_USERNAME')}:{os.getenv('NEO4J_PASSWORD')}@{os.getenv('NEO4J_URI').replace('neo4j+s://', '')}"
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

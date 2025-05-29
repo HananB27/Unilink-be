@@ -9,6 +9,13 @@ from django.contrib.auth.base_user import AbstractBaseUser
 from django.db import models
 from django.contrib.auth.models import BaseUserManager, PermissionsMixin
 
+ROLES=[
+        ('student', 'Student'),
+        ('professor', 'Professor'),
+        ('department', 'Department'),
+        ('company', 'Company'),
+        ('admin', 'Admin'),
+    ]
 
 class UserManager(BaseUserManager):
     def create_user(self, email, password=None, **extra_fields):
@@ -37,18 +44,26 @@ class Users(AbstractBaseUser, PermissionsMixin):
     last_name = models.CharField(max_length=64)
     description = models.TextField(blank=True, null=True)
     status = models.CharField(max_length=100, blank=True, null=True)
-    profile_picture = models.TextField(blank=True, null=True)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
-    
-    objects = UserManager()
+    role = models.CharField(max_length=64, choices=ROLES, default='student')
 
+    profile_picture = models.ImageField(
+        upload_to='user-profile-picture',
+        db_column='profile_picture',
+        blank=True,
+        null=True
+    )
+
+    groups = None
+    user_permissions = None
+
+    objects = UserManager()
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username']
 
     class Meta:
-        managed = False
         db_table = 'users'
 
 

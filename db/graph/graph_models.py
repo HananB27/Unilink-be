@@ -40,6 +40,7 @@ class User(StructuredNode):
 
     affiliated_with = RelationshipTo('University', 'AFFILIATED_WITH')
     employed_at = RelationshipTo('Company', 'EMPLOYED_AT')
+    represents = RelationshipTo('Company', 'REPRESENTS')
     interested_in = RelationshipTo('Tag', 'INTERESTED_IN')
     posted = RelationshipTo('Post', 'POSTED')
     connected_with = RelationshipTo('User', 'CONNECTED_WITH')
