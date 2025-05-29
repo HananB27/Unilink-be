@@ -4,19 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="78c6d013-6d55-4d8c-ac1e-fdbb8eb7f529" name="Changes" comment="connect with graph and create first node">
+    <list default="true" id="78c6d013-6d55-4d8c-ac1e-fdbb8eb7f529" name="Changes" comment="create users in graph and companies, when user signs up add relationship between nodes">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Unilink_be/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/Unilink_be/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Unilink_be/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Unilink_be/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/universities/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/universities/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/universities/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/universities/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/universities/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/universities/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/users/migrations/0001_initial.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/users/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/users/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/users/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/users/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/users/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/users/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db/graph/graph_models.py" beforeDir="false" afterPath="$PROJECT_DIR$/db/graph/graph_models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/user-profile-picture/32403354493a0fe7fe362882ff282f54_a2ZV7mS.png" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -121,7 +115,7 @@
       <workItem from="1748253545917" duration="2085000" />
       <workItem from="1748259496501" duration="13896000" />
       <workItem from="1748377806464" duration="2649000" />
-      <workItem from="1748430609932" duration="24742000" />
+      <workItem from="1748430609932" duration="29655000" />
     </task>
     <task id="LOCAL-00001" summary="Init">
       <option name="closed" value="true" />
@@ -179,7 +173,15 @@
       <option name="project" value="LOCAL" />
       <updated>1748345515074</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="create users in graph and companies, when user signs up add relationship between nodes">
+      <option name="closed" value="true" />
+      <created>1748546965764</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1748546965764</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -193,6 +195,7 @@
     <MESSAGE value="Remove env and reconstruct architecture" />
     <MESSAGE value="Add models into new app structure, models only added to apps folder" />
     <MESSAGE value="connect with graph and create first node" />
-    <option name="LAST_COMMIT_MESSAGE" value="connect with graph and create first node" />
+    <MESSAGE value="create users in graph and companies, when user signs up add relationship between nodes" />
+    <option name="LAST_COMMIT_MESSAGE" value="create users in graph and companies, when user signs up add relationship between nodes" />
   </component>
 </project>

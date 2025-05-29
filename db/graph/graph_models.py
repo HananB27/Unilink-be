@@ -3,17 +3,19 @@ from neomodel import (
     UniqueIdProperty
 )
 
+class OfficialAccount(StructuredNode):
+    uid = UniqueIdProperty()
+    name = StringProperty(unique_index=True)
+
 class Tag(StructuredNode):
     uid = UniqueIdProperty()
     name = StringProperty(unique_index=True)
 
-class Company(StructuredNode):
-    uid = UniqueIdProperty()
-    name = StringProperty(unique_index=True)
+class Company(OfficialAccount):
+    pass
 
-class University(StructuredNode):
-    uid = UniqueIdProperty()
-    name = StringProperty(unique_index=True)
+class University(OfficialAccount):
+    pass
 
 class Post(StructuredNode):
     uid = UniqueIdProperty()
@@ -25,10 +27,7 @@ class Post(StructuredNode):
     posted_by = RelationshipFrom('User', 'POSTED')
     posted_by_dept = RelationshipFrom('Department', 'POSTED')
 
-class Department(StructuredNode):
-    uid = UniqueIdProperty()
-    name = StringProperty(unique_index=True)
-
+class Department(OfficialAccount):
     belongs_to = RelationshipTo('University', 'BELONGS_TO')
     posts = RelationshipTo('Post', 'POSTED')
 
@@ -40,7 +39,6 @@ class User(StructuredNode):
 
     affiliated_with = RelationshipTo('University', 'AFFILIATED_WITH')
     employed_at = RelationshipTo('Company', 'EMPLOYED_AT')
-    represents = RelationshipTo('Company', 'REPRESENTS')
     interested_in = RelationshipTo('Tag', 'INTERESTED_IN')
     posted = RelationshipTo('Post', 'POSTED')
     connected_with = RelationshipTo('User', 'CONNECTED_WITH')

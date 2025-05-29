@@ -10,7 +10,7 @@ from .models import Universities, Departments
 
 # Create your views here.
 @csrf_exempt
-def createUniversity(request):
+def create_university(request):
     if request.method == 'POST':
         try:
 
@@ -46,7 +46,7 @@ def createUniversity(request):
     return JsonResponse({'error':'invalid request'}, status=400)
 
 @csrf_exempt
-def getUniversities(request):
+def get_universities(request):
     try:
         if request.method == 'GET':
             universities = Universities.objects.all().values('id', 'name', 'location', 'profile_picture')
@@ -56,7 +56,7 @@ def getUniversities(request):
         return JsonResponse({'error':str(e)}, status=500)
 
 @csrf_exempt
-def deleteUniversity(request, university_id):
+def delete_university(request, university_id):
     try:
         university = Universities.objects.get(id=university_id)
         uniGraph=University.nodes.get(name=university.name)
@@ -77,7 +77,7 @@ def deleteUniversity(request, university_id):
         return JsonResponse({'error': str(e)}, status=500)
 
 @csrf_exempt
-def editUniversity(request, university_id):
+def edit_university(request, university_id):
     try:
         university = Universities.objects.get(id=university_id)
 
@@ -110,7 +110,7 @@ def editUniversity(request, university_id):
         return JsonResponse({'error': str(e)}, status=500)
 
 @csrf_exempt
-def getUniversity(request, university_id):
+def get_university(request, university_id):
     try:
         if request.method == 'GET':
             university = Universities.objects.get(id=university_id)
@@ -128,7 +128,7 @@ def getUniversity(request, university_id):
         return JsonResponse({'error': str(e)}, status=500)
 
 @csrf_exempt
-def createDepartment(request):
+def create_department(request):
     try:
         if request.method == 'POST':
             name = request.POST.get('name')

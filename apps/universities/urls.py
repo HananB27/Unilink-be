@@ -3,13 +3,13 @@ from . import views
 
 urlpatterns = [
     #University endpoints
-    path('create/', views.createUniversity),
-    path('get/', views.getUniversities),
-    path('delete/<int:university_id>', views.deleteUniversity),
-    path('edit/', views.editUniversity),
-    path('get/<int:university_id>/', views.getUniversity),
-    path('edit/<int:university_id>/', views.editUniversity),
+    path('create/', views.create_university),
+    path('get/', views.get_universities),
+    path('delete/<int:university_id>', views.delete_university),
+    path('edit/', views.edit_university),
+    path('get/<int:university_id>/', views.get_university),
+    path('edit/<int:university_id>/', views.edit_university),
 
     #Department endpoints
-    path('createDepartment/',views.createDepartment)
+    path('createDepartment/',views.create_department)
 ]
