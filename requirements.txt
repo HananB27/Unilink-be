@@ -4,3 +4,8 @@ dotenv==0.9.9
 psycopg2-binary==2.9.10
 python-dotenv==1.1.0
 sqlparse==0.5.3
+
+neomodel~=5.4.5
+djangorestframework~=3.16.0
+pillow~=11.2.1
+protobuf~=6.31.1
