@@ -9,11 +9,12 @@ from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework_simplejwt.tokens import RefreshToken
 from neomodel.exceptions import DoesNotExist as NeoModelDoesNotExist, MultipleNodesReturned
 from django.http import JsonResponse
-from django.db import transaction
+from django.db import transaction, IntegrityError
 from django.views.decorators.csrf import csrf_exempt
 
-from apps.users.models import ROLES, Users
-from db.graph.graph_models import User as UserNode, Company, University, Department, User
+from apps.posts.models import Tags
+from apps.users.models import ROLES, Users, UserInterests
+from db.graph.graph_models import User as UserNode, Company, University, Department, User, Tag
 from utils.embeddings import embed_text
 
 DjangoUser = get_user_model()
@@ -68,6 +69,8 @@ def signup(request):
                         University(name=username, email=email).save()
                     elif role == 'department':
                         Department(name=username, email=email).save()
+                    elif role in ['student', 'professor']:
+                        UserNode(name=username, email=email, role=role).save()
                 except Exception as graph_error:
                     user.delete()
                     return JsonResponse({'error': f'Neo4j error: {str(graph_error)}'}, status=500)
@@ -440,3 +443,78 @@ def remove_friend(request, target_email):
             return JsonResponse({'message': message}, status=400)  # Bad Request/Not Implemented
         else:
             return JsonResponse({'message': message}, status=500)
+
+@api_view(['POST', 'DELETE'])
+@authentication_classes([JWTAuthentication])
+@permission_classes([IsAuthenticated])
+def user_interest_toggle(request, tag_name):
+    tag_name = tag_name.strip().lower()
+
+    if not tag_name:
+        return JsonResponse({'error': 'Invalid tag name'}, status=400)
+
+    try:
+        user = request.user
+        if user.role not in ['student', 'professor']:
+            return JsonResponse({'error': 'Only students and professors can express interests.'}, status=403)
+        email = user.email
+
+        # --- 1. Relational DB section ---
+        tag, created = Tags.objects.get_or_create(name=tag_name)
+
+        if created or tag.embedding is None:
+            embedding_vector = embed_text(tag.name)
+            if embedding_vector:
+                tag.embedding = embedding_vector
+                tag.save(update_fields=["embedding"])
+
+        if request.method == 'POST':
+            try:
+                obj = UserInterests.objects.get(user=user, tag=tag)
+                added = False
+            except UserInterests.DoesNotExist:
+                try:
+                    UserInterests.objects.create(user=user, tag=tag)
+                    added = True
+                except IntegrityError:
+                    added = False
+
+            # --- 2. Neo4j INTERESTED_IN ---
+            graph_user = User.nodes.get_or_none(email=email)
+            if not graph_user:
+                return JsonResponse({'error': 'Graph user not found'}, status=404)
+
+            graph_tag = Tag.nodes.get_or_none(name=tag_name)
+            if not graph_tag:
+                graph_tag = Tag(name=tag_name).save()
+
+            if not graph_user.interested_in.is_connected(graph_tag):
+                graph_user.interested_in.connect(graph_tag)
+
+            if not added:
+                return JsonResponse({'message': 'Interest already exists.'}, status=409)
+
+            return JsonResponse({'message': f'Added interest in tag: {tag_name}'}, status=201)
+
+        elif request.method == 'DELETE':
+            try:
+                interest = UserInterests.objects.get(user=user, tag=tag)
+                interest.delete()
+
+                # --- Remove from Neo4j ---
+                graph_user = User.nodes.get_or_none(email=email)
+                if not graph_user:
+                    return JsonResponse({'error': 'Graph user not found'}, status=404)
+
+                graph_tag = Tag.nodes.get_or_none(name=tag_name)
+                if graph_tag and graph_user.interested_in.is_connected(graph_tag):
+                    graph_user.interested_in.disconnect(graph_tag)
+
+                return JsonResponse({'message': f'Removed interest in tag: {tag_name}'}, status=200)
+            except UserInterests.DoesNotExist:
+                return JsonResponse({'message': 'Interest does not exist.'}, status=404)
+
+        return JsonResponse({'error': 'Unsupported method'}, status=405)
+
+    except Exception as e:
+        return JsonResponse({'error': str(e)}, status=500)
