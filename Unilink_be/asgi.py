@@ -1,16 +1,18 @@
-"""
-ASGI config for Unilink_be project.
-
-It exposes the ASGI callable as a module-level variable named ``application``.
-
-For more information on this file, see
-https://docs.djangoproject.com/en/5.2/howto/deployment/asgi/
-"""
-
 import os
-
-from django.core.asgi import get_asgi_application
+import django
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Unilink_be.settings')
 
-application = get_asgi_application()
+django.setup()
+
+from channels.routing import ProtocolTypeRouter, URLRouter
+from channels.auth import AuthMiddlewareStack
+from apps.chat.routing import websocket_urlpatterns  # This can now safely import models
+
+from django.core.asgi import get_asgi_application
+from Unilink_be.routing import application as websocket_application
+
+application = ProtocolTypeRouter({
+    "http": get_asgi_application(),
+    "websocket": websocket_application,  # ✅ plug in here
+})

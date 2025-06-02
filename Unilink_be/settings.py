@@ -52,6 +52,8 @@ INSTALLED_APPS = [
     'apps.caching',
     'rest_framework',
     'rest_framework_simplejwt',
+    'channels',
+    'apps.chat',
 ]
 
 SESSION_ENGINE = 'django.contrib.sessions.backends.db'
@@ -86,6 +88,20 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'Unilink_be.wsgi.application'
+ASGI_APPLICATION = 'Unilink_be.wsgi.application'
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('127.0.0.1', 6379)],
+        },
+    },
+}
+
+
+DATABASE_ROUTERS = ['Unilink_be.db_router.ChatRouter']
+
 
 
 # Database
