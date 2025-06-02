@@ -9,11 +9,13 @@ https://docs.djangoproject.com/en/5.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
+
 import os
 from pathlib import Path
 from dotenv import load_dotenv
+load_dotenv()
 from urllib.parse import urlparse
-
+import google.generativeai as genai
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -30,6 +32,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
+genai.configure(api_key=os.environ['GENAI_API_KEY'])
 
 # Application definition
 
@@ -47,6 +50,8 @@ INSTALLED_APPS = [
     'apps.universities',
     'apps.relationships',
     'apps.caching',
+    'rest_framework',
+    'rest_framework_simplejwt',
     'channels',
     'apps.chat',
 ]
@@ -183,3 +188,23 @@ NEOMODEL_NEO4J_BOLT_URL = f"neo4j+s://{os.getenv('NEO4J_USERNAME')}:{os.getenv('
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'rest_framework.authentication.SessionAuthentication', # Recommended for browsable API / admin
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+        # 'rest_framework.renderers.BrowsableAPIRenderer', # Optional: Add this if you use Django REST Framework's browsable API
+    ),
+    'PAGE_SIZE': 10,
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+
+}
+
+SILENCED_SYSTEM_CHECKS = ['fields.W342']
+

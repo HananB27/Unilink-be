@@ -6,6 +6,10 @@ from neomodel import (
 class OfficialAccount(StructuredNode):
     uid = UniqueIdProperty()
     name = StringProperty(unique_index=True)
+    email = StringProperty(unique_index=True)
+
+    posted = RelationshipTo('Post', 'POSTED')
+    associated_with = RelationshipTo('OfficialAccount', 'ASSOCIATED_WITH')
 
 class Tag(StructuredNode):
     uid = UniqueIdProperty()
@@ -19,6 +23,7 @@ class University(OfficialAccount):
 
 class Post(StructuredNode):
     uid = UniqueIdProperty()
+    post_id = StringProperty(unique_index=True)
     title = StringProperty()
     type = StringProperty()
     content = StringProperty(default=None)
@@ -42,3 +47,4 @@ class User(StructuredNode):
     interested_in = RelationshipTo('Tag', 'INTERESTED_IN')
     posted = RelationshipTo('Post', 'POSTED')
     connected_with = RelationshipTo('User', 'CONNECTED_WITH')
+    works_in_department = RelationshipTo('Department', 'WORKS_IN_DEPARTMENT')

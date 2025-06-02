@@ -8,10 +8,12 @@
 from django.contrib.auth.base_user import AbstractBaseUser
 from django.db import models
 from django.contrib.auth.models import BaseUserManager, PermissionsMixin
+from pgvector.django import VectorField
 
 ROLES=[
         ('student', 'Student'),
         ('professor', 'Professor'),
+        ('university', 'University'),
         ('department', 'Department'),
         ('company', 'Company'),
         ('admin', 'Admin'),
@@ -49,6 +51,8 @@ class Users(AbstractBaseUser, PermissionsMixin):
     is_superuser = models.BooleanField(default=False)
     role = models.CharField(max_length=64, choices=ROLES, default='student')
 
+    embedding = VectorField(dimensions=768, blank=True, null=True)
+
     profile_picture = models.ImageField(
         upload_to='user-profile-picture',
         db_column='profile_picture',
@@ -62,6 +66,10 @@ class Users(AbstractBaseUser, PermissionsMixin):
     objects = UserManager()
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username']
+
+    def delete(self, *args, **kwargs):
+        self.profile_picture.delete()
+        super(Users, self).delete(*args, **kwargs)
 
     class Meta:
         db_table = 'users'

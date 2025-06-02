@@ -15,4 +15,3 @@ class UsersConfig(AppConfig):
         host = os.environ.get('NEO4J_URI', '').replace('neo4j+s://', '')
         config.DATABASE_URL =f"bolt+s://{neo4j_user}:{neo4j_password}@{host}"
 
-        print(f"[NEO4J CONFIG] Connected to {config.DATABASE_URL}")

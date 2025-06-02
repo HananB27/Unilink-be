@@ -19,6 +19,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import path, include
 from django.contrib.auth import views as auth_views
+from rest_framework_simplejwt.views import TokenRefreshView
 
 
 urlpatterns = [
@@ -29,4 +30,6 @@ urlpatterns = [
     path('api/universities/', include('apps.universities.urls')),
     path('api/core/', include('apps.core.urls')),
     path('api/caching/', include('apps.caching.urls')),
+
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
