@@ -50,4 +50,6 @@ class UserAdmin(BaseUserAdmin):
     search_fields = ('email', 'username')
     ordering = ('email',)
 
+    filter_horizontal = () #overwrites from parent, fixes a bug
+
 admin.site.register(Users, UserAdmin)

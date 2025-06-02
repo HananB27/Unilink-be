@@ -5,12 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="78c6d013-6d55-4d8c-ac1e-fdbb8eb7f529" name="Changes" comment="create users in graph and companies, when user signs up add relationship between nodes">
+      <change beforePath="$PROJECT_DIR$/.idea/DjangoProject.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/DjangoProject.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/universities/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/universities/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/universities/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/universities/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/users/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/users/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/graph/graph_models.py" beforeDir="false" afterPath="$PROJECT_DIR$/db/graph/graph_models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/media/user-profile-picture/32403354493a0fe7fe362882ff282f54_a2ZV7mS.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Unilink_be/asgi.py" beforeDir="false" afterPath="$PROJECT_DIR$/Unilink_be/asgi.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Unilink_be/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/Unilink_be/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Unilink_be/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Unilink_be/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/users/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/users/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/users/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/users/models.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,7 +32,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="graph" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -44,7 +46,7 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/HananB27/Unilink-be.git&quot;,
-    &quot;accountId&quot;: &quot;e1bfa3e2-aa52-4f3e-a20f-81a6d4e792b9&quot;
+    &quot;accountId&quot;: &quot;a62ab27d-6899-4246-8d27-cadba8b5c51c&quot;
   }
 }</component>
   <component name="ProjectColorInfo">{
@@ -55,22 +57,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.OpenDjangoStructureViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "graph",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.keymap",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenDjangoStructureViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;redis&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="DjangoProject" type="Python.DjangoServer" factoryName="Django server">
       <module name="DjangoProject" />
@@ -116,6 +118,10 @@
       <workItem from="1748259496501" duration="13896000" />
       <workItem from="1748377806464" duration="2649000" />
       <workItem from="1748430609932" duration="29655000" />
+      <workItem from="1748561705841" duration="4593000" />
+      <workItem from="1748886232405" duration="1371000" />
+      <workItem from="1748887626926" duration="3005000" />
+      <workItem from="1748903591431" duration="3241000" />
     </task>
     <task id="LOCAL-00001" summary="Init">
       <option name="closed" value="true" />
@@ -197,5 +203,19 @@
     <MESSAGE value="connect with graph and create first node" />
     <MESSAGE value="create users in graph and companies, when user signs up add relationship between nodes" />
     <option name="LAST_COMMIT_MESSAGE" value="create users in graph and companies, when user signs up add relationship between nodes" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/apps/posts/urls.py</url>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/Unilink_be/asgi.py</url>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
