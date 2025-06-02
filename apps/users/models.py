@@ -10,6 +10,8 @@ from django.db import models
 from django.contrib.auth.models import BaseUserManager, PermissionsMixin
 from pgvector.django import VectorField
 
+from apps.posts.models import Tags
+
 ROLES=[
         ('student', 'Student'),
         ('professor', 'Professor'),
@@ -85,12 +87,16 @@ class UserSkills(models.Model):
 
 
 class UserInterests(models.Model):
-    user = models.ForeignKey(Users, models.DO_NOTHING)
-    tag = models.ForeignKey('posts.Tags', models.DO_NOTHING)
+    user = models.ForeignKey(Users, models.DO_NOTHING, primary_key=True, db_column='user_id')
+    tag = models.ForeignKey(Tags, models.DO_NOTHING, db_column='tag_id')
 
     class Meta:
         # managed = False
         db_table = 'user_interests'
+        unique_together = (('user', 'tag'),)
+
+    def __str__(self):
+        return f"{self.user.email} - {self.tag.name}"
 # This is an auto-generated Django model module.
 # You'll have to do the following manually to clean this up:
 #   * Rearrange models' order

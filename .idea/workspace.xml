@@ -4,16 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="78c6d013-6d55-4d8c-ac1e-fdbb8eb7f529" name="Changes" comment="user relations">
-      <change afterPath="$PROJECT_DIR$/utils/embeddings.py" afterDir="false" />
+    <list default="true" id="78c6d013-6d55-4d8c-ac1e-fdbb8eb7f529" name="Changes" comment="add gemini and embed data into a vector">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Unilink_be/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/Unilink_be/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/posts/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/posts/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/posts/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/posts/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/universities/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/universities/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/universities/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/universities/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/users/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/users/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/users/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/users/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/users/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/users/views.py" afterDir="false" />
+
       <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
 
     </list>
@@ -126,6 +122,7 @@
       <workItem from="1748886232405" duration="1371000" />
       <workItem from="1748887626926" duration="3005000" />
       <workItem from="1748903591431" duration="3241000" />
+
     </task>
     <task id="LOCAL-00001" summary="Init">
       <option name="closed" value="true" />
@@ -223,7 +220,15 @@
       <option name="project" value="LOCAL" />
       <updated>1748904026881</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="add gemini and embed data into a vector">
+      <option name="closed" value="true" />
+      <created>1748906042437</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1748906042438</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -241,7 +246,8 @@
     <MESSAGE value="resolve multiple nodes issue" />
     <MESSAGE value="post creation" />
     <MESSAGE value="user relations" />
-    <option name="LAST_COMMIT_MESSAGE" value="user relations" />
+    <MESSAGE value="add gemini and embed data into a vector" />
+    <option name="LAST_COMMIT_MESSAGE" value="add gemini and embed data into a vector" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
