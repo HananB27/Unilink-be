@@ -4,15 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="78c6d013-6d55-4d8c-ac1e-fdbb8eb7f529" name="Changes" comment="post creation">
+    <list default="true" id="78c6d013-6d55-4d8c-ac1e-fdbb8eb7f529" name="Changes" comment="user relations">
+      <change afterPath="$PROJECT_DIR$/utils/embeddings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Unilink_be/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/Unilink_be/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/posts/serializer.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/posts/serializer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/posts/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/posts/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/posts/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/posts/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/posts/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/posts/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/users/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/users/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/universities/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/universities/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/universities/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/universities/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/users/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/users/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/users/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/users/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/graph/graph_models.py" beforeDir="false" afterPath="$PROJECT_DIR$/db/graph/graph_models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -33,7 +34,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="graph" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -64,7 +65,7 @@
     "RunOnceActivity.OpenDjangoStructureViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "graph",
+    "git-widget-placeholder": "vector",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -118,7 +119,7 @@
       <workItem from="1748253545917" duration="2085000" />
       <workItem from="1748259496501" duration="13896000" />
       <workItem from="1748377806464" duration="2649000" />
-      <workItem from="1748430609932" duration="63535000" />
+      <workItem from="1748430609932" duration="65570000" />
     </task>
     <task id="LOCAL-00001" summary="Init">
       <option name="closed" value="true" />
@@ -208,7 +209,15 @@
       <option name="project" value="LOCAL" />
       <updated>1748880182934</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="user relations">
+      <option name="closed" value="true" />
+      <created>1748904026881</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1748904026881</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -225,7 +234,8 @@
     <MESSAGE value="create users in graph and companies, when user signs up add relationship between nodes" />
     <MESSAGE value="resolve multiple nodes issue" />
     <MESSAGE value="post creation" />
-    <option name="LAST_COMMIT_MESSAGE" value="post creation" />
+    <MESSAGE value="user relations" />
+    <option name="LAST_COMMIT_MESSAGE" value="user relations" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

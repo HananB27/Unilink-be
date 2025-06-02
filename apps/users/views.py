@@ -14,6 +14,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 from apps.users.models import ROLES, Users
 from db.graph.graph_models import User as UserNode, Company, University, Department, User
+from utils.embeddings import embed_text
 
 DjangoUser = get_user_model()
 
@@ -52,6 +53,13 @@ def signup(request):
                     profile_picture=profile_picture,
                     role=role
                 )
+
+                text = f"{first_name or ''} {last_name or ''} {role} {username or ''}"
+                embedding_vector = embed_text(text)
+
+                if embedding_vector:
+                    user.embedding = embedding_vector
+                    user.save(update_fields=["embedding"])
 
                 try:
                     if role == 'company':

@@ -5,6 +5,7 @@ from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 
 from db.graph.graph_models import University, Department
+from utils.embeddings import embed_text
 from .models import Universities, Departments
 
 
@@ -31,6 +32,13 @@ def create_university(request):
                     location=location,
                     profile_picture=profile_picture
                 )
+
+            text = f"{name} located in {location}"
+            embedding_vector = embed_text(text)
+
+            if embedding_vector:
+                university.embedding = embedding_vector
+                university.save(update_fields=["embedding"])
 
             profile_picture = request.build_absolute_uri(university.profile_picture) if university.profile_picture else None
 

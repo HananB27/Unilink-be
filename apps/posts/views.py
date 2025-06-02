@@ -18,6 +18,7 @@ from Unilink_be import settings
 from apps.posts.models import Posts, PostTags, Tags
 from apps.posts.serializer import PostSerializer
 from db.graph.graph_models import Post, User, Tag, OfficialAccount
+from utils.embeddings import embed_text
 
 Users = get_user_model()
 
@@ -93,6 +94,14 @@ def create_post(request):
         serializer = PostSerializer(data=data, context={'request': request})
         if serializer.is_valid():
             serializer.save(user=django_user_obj)
+
+            post_instance = serializer.instance
+            text_to_embed = f"{post_instance.title or ''} {post_instance.content}"
+            embedding_vector = embed_text(text_to_embed)
+
+            if embedding_vector:
+                post_instance.embedding = embedding_vector
+                post_instance.save(update_fields=['embedding'])
 
             try:
                 account_node = get_graph_account_node(user_email, user_role)
