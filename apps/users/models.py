@@ -80,7 +80,7 @@ class UserSkills(models.Model):
     skill = models.ForeignKey('Skills', models.DO_NOTHING)
 
     class Meta:
-        managed = False
+        # managed = False
         db_table = 'user_skills'
 
 
@@ -89,7 +89,7 @@ class UserInterests(models.Model):
     tag = models.ForeignKey('posts.Tags', models.DO_NOTHING)
 
     class Meta:
-        managed = False
+        # managed = False
         db_table = 'user_interests'
 # This is an auto-generated Django model module.
 # You'll have to do the following manually to clean this up:
@@ -105,5 +105,5 @@ class Skills(models.Model):
     name = models.CharField(unique=True, max_length=50)
 
     class Meta:
-        managed = False
+        # managed = False
         db_table = 'skills'
