@@ -8,6 +8,7 @@
 from django.contrib.auth.base_user import AbstractBaseUser
 from django.db import models
 from django.contrib.auth.models import BaseUserManager, PermissionsMixin
+from pgvector.django import VectorField
 
 ROLES=[
         ('student', 'Student'),
@@ -49,6 +50,8 @@ class Users(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
     role = models.CharField(max_length=64, choices=ROLES, default='student')
+
+    embedding = VectorField(dimensions=768, blank=True, null=True)
 
     profile_picture = models.ImageField(
         upload_to='user-profile-picture',
