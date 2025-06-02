@@ -1,9 +1,12 @@
+import os
+
 from PIL.TiffTags import TAGS_V2
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ObjectDoesNotExist
 from django.db import transaction
 from django.http import JsonResponse
 from django.shortcuts import render
+from django.utils import timezone
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.authentication import SessionAuthentication
 from rest_framework.decorators import authentication_classes, permission_classes, api_view, parser_classes
@@ -11,6 +14,7 @@ from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.authentication import JWTAuthentication
 
+from Unilink_be import settings
 from apps.posts.models import Posts, PostTags, Tags
 from apps.posts.serializer import PostSerializer
 from db.graph.graph_models import Post, User, Tag, OfficialAccount
@@ -19,9 +23,9 @@ Users = get_user_model()
 
 def check_permission(request, obj):
     if request.method in ['GET', 'HEAD', 'OPTIONS']:
-        return True, None  # Allow read operations by default if authenticated
+        return True, None
     if hasattr(obj, 'user') and obj.user == request.user:
-        return True, None  # User owns the object
+        return True, None
     else:
         return False, JsonResponse({'message': 'You do not have permission to perform this action.'}, status=403)
 
@@ -94,9 +98,11 @@ def create_post(request):
                 account_node = get_graph_account_node(user_email, user_role)
 
                 graph_post = Post(
-                    post_id=serializer.data['id'],
+                    post_id=str(serializer.data['id']),
                     content=serializer.data['content'],
-                    created_at=serializer.data['created_at'],
+                    title=serializer.data['title'],
+                    image=serializer.data['image'],
+                    created_at=timezone.now(),
                     updated_at=serializer.data['updated_at'],
                 ).save()
 
@@ -126,3 +132,67 @@ def create_post(request):
             return JsonResponse(serializer.data, status=201)
         else:
             return JsonResponse(serializer.errors, status=400)
+
+@api_view(['PUT'])
+@authentication_classes([JWTAuthentication, SessionAuthentication])
+@permission_classes([IsAuthenticated])
+@csrf_exempt
+def update_post(request, id):
+    try:
+        post = Posts.objects.get(id=id)
+    except Posts.DoesNotExist:
+        return JsonResponse({'message': 'Post not found'}, status=404)
+
+    has_permission, response = check_permission(request, post)
+    if not has_permission:
+        return response
+
+    serializer = PostSerializer(post, data=request.data, partial=True, context={'request': request})
+    if serializer.is_valid():
+        serializer.save()
+
+        graph_post = Post.nodes.get_or_none(post_id=id)
+        if graph_post:
+            if 'content' in request.data:
+                graph_post.content = request.data['content']
+            if 'title' in request.data:
+                graph_post.title = request.data['title']
+            graph_post.save()
+
+        return JsonResponse(serializer.data, status=200)
+    return JsonResponse(serializer.errors, status=400)
+
+
+@api_view(['DELETE'])
+@authentication_classes([JWTAuthentication, SessionAuthentication])
+@permission_classes([IsAuthenticated])
+@csrf_exempt
+def delete_post(request, uid):
+    try:
+        post = Posts.objects.get(id=uid)
+    except Posts.DoesNotExist:
+        return JsonResponse({'message': 'Post not found'}, status=404)
+
+    has_permission, response = check_permission(request, post)
+    if not has_permission:
+        return response
+
+    image_path = None
+    if post.image:
+        image_path = os.path.join(settings.MEDIA_ROOT, post.image.name)
+
+    try:
+        graph_post = Post.nodes.get_or_none(post_id=str(uid))
+        if graph_post:
+            graph_post.delete()
+
+        if post.image:
+            image_path = os.path.join(settings.MEDIA_ROOT, post.image.name)
+            if os.path.exists(image_path):
+                os.remove(image_path)
+
+        post.delete()
+    except Exception as e:
+        return JsonResponse({'message': f'Error deleting post or image: {str(e)}'}, status=500)
+
+    return JsonResponse({'message': 'Post deleted successfully'}, status=204)
