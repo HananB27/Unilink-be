@@ -1,7 +1,7 @@
 import json
 
 from django.contrib.auth import login, authenticate, logout, get_user_model
-from django.core.files.storage import default_storage
+from rest_framework_simplejwt.tokens import RefreshToken
 from django.http import JsonResponse
 from django.db import transaction
 from django.views.decorators.csrf import csrf_exempt
@@ -49,16 +49,20 @@ def signup(request):
 
                 try:
                     if role == 'company':
-                        Company(name=username).save()
+                        Company(name=username, email=email).save()
                     elif role == 'university':
-                        University(name=username).save()
+                        University(name=username, email=email).save()
                     elif role == 'department':
-                        Department(name=username).save()
+                        Department(name=username, email=email).save()
                 except Exception as graph_error:
                     user.delete()
                     return JsonResponse({'error': f'Neo4j error: {str(graph_error)}'}, status=500)
-
-                return JsonResponse({'message': 'User created successfully'}, status=201)
+                token = RefreshToken.for_user(user)
+                return JsonResponse({
+                    'message': 'User created successfully',
+                    'access': str(token.access_token),
+                    'refresh': str(token),
+                }, status=201)
         except Exception as e:
             return JsonResponse({'error': str(e)}, status=500)
 
@@ -75,7 +79,12 @@ def login_view(request):
             user = authenticate(request, username=email, password=password)
             if user is not None:
                 login(request, user)
-                return JsonResponse({'message': 'Logged in'}, status=200)
+                token = RefreshToken.for_user(user)
+                return JsonResponse({
+                    'message': 'Logged in',
+                    'access': str(token.access_token),
+                    'refresh': str(token),
+                }, status=200)
             else:
                 return JsonResponse({'error': 'Invalid credentials'}, status=400)
         except Exception as e:
@@ -107,16 +116,6 @@ def delete_user(request, user_id):
             email = user.email
 
             debug_log.append(f"User found: ID={user.id}, email={email}, username={username}, role={role}")
-
-            # Delete profile picture
-            if user.profile_picture:
-                if default_storage.exists(user.profile_picture.name):
-                    default_storage.delete(user.profile_picture.name)
-                    debug_log.append("Profile picture deleted from storage.")
-                else:
-                    debug_log.append("Profile picture file does not exist in storage.")
-            else:
-                debug_log.append("User has no profile picture.")
 
             if role == 'company':
                 node = Company.nodes.get_or_none(name=username)

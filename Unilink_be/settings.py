@@ -47,6 +47,8 @@ INSTALLED_APPS = [
     'apps.universities',
     'apps.relationships',
     'apps.caching',
+    'rest_framework',
+    'rest_framework_simplejwt',
 ]
 
 SESSION_ENGINE = 'django.contrib.sessions.backends.db'
@@ -167,3 +169,22 @@ NEOMODEL_NEO4J_BOLT_URL = f"neo4j+s://{os.getenv('NEO4J_USERNAME')}:{os.getenv('
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'rest_framework.authentication.SessionAuthentication', # Recommended for browsable API / admin
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+        # 'rest_framework.renderers.BrowsableAPIRenderer', # Optional: Add this if you use Django REST Framework's browsable API
+    ),
+    'PAGE_SIZE': 10,
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+
+}
+
+SILENCED_SYSTEM_CHECKS = ['fields.W342']

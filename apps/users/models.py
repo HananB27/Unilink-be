@@ -12,6 +12,7 @@ from django.contrib.auth.models import BaseUserManager, PermissionsMixin
 ROLES=[
         ('student', 'Student'),
         ('professor', 'Professor'),
+        ('university', 'University'),
         ('department', 'Department'),
         ('company', 'Company'),
         ('admin', 'Admin'),
@@ -62,6 +63,10 @@ class Users(AbstractBaseUser, PermissionsMixin):
     objects = UserManager()
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username']
+
+    def delete(self, *args, **kwargs):
+        self.profile_picture.delete()
+        super(Users, self).delete(*args, **kwargs)
 
     class Meta:
         db_table = 'users'

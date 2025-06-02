@@ -6,6 +6,9 @@ from neomodel import (
 class OfficialAccount(StructuredNode):
     uid = UniqueIdProperty()
     name = StringProperty(unique_index=True)
+    email = StringProperty(unique_index=True)
+
+    posted = RelationshipTo('Post', 'POSTED')
 
 class Tag(StructuredNode):
     uid = UniqueIdProperty()
