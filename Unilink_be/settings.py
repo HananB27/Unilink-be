@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'channels',
     'apps.chat',
+    'corsheaders',
 ]
 
 SESSION_ENGINE = 'django.contrib.sessions.backends.db'
@@ -67,6 +68,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
 
 ROOT_URLCONF = 'Unilink_be.urls'
@@ -207,4 +210,6 @@ REST_FRAMEWORK = {
 }
 
 SILENCED_SYSTEM_CHECKS = ['fields.W342']
+
+CORS_ORIGIN_ALLOW_ALL = True
 
