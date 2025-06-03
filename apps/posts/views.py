@@ -31,7 +31,7 @@ def check_permission(request, obj):
         return False, JsonResponse({'message': 'You do not have permission to perform this action.'}, status=403)
 
 def get_graph_account_node(email, user_role):
-    if user_role in ['department', 'company', 'admin']:
+    if user_role in ['department', 'company', 'admin', 'university']:
         node = OfficialAccount.nodes.get_or_none(email=email)
         if not node:
             raise ValueError(f"Official account node not found for email: {email}")
@@ -73,7 +73,7 @@ def create_post(request):
         return JsonResponse({'message': 'Method not allowed'}, status=405)
 
     try:
-        data = request.data
+        data = request.data.copy()
         tag_names = data.pop('tags', [])
     except Exception as e:
         return JsonResponse({'message': f'Error parsing request data: {str(e)}'}, status=400)

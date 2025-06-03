@@ -261,13 +261,18 @@ def manage_relationship(requester_node, requester_type, requester_role, target_n
                     if requester_role == 'student':
                         return _check_and_perform(requester_node.affiliated_with, 'affiliated with')
                     elif requester_role == 'professor':
-                        return _check_and_perform(requester_node.employed_at,
-                                                  'employed at')  # Assuming professors use employed_at for universities
+                        if target_type == 'University':
+                            return _check_and_perform(requester_node.employed_at_university, 'employed_at')
+                        elif target_type == 'Company':
+                            return _check_and_perform(requester_node.employed_at_company, 'employed at')  # Assuming professors use employed_at for universities
+                        elif target_type == 'Department':
+                            return _check_and_perform_incoming(requester_node.employed_at_department, 'employed at', target_node)
+                        return None
                     else:
                         return False, f"Unsupported role '{requester_role}' for connecting to a university."
 
                 elif target_type == 'Company':
-                    return _check_and_perform(requester_node.employed_at, 'employed at')
+                    return _check_and_perform(requester_node.employed_at_company, 'employed at')
 
                 elif target_type == 'Department':
                     if requester_role == 'professor':
@@ -515,6 +520,37 @@ def user_interest_toggle(request, tag_name):
                 return JsonResponse({'message': 'Interest does not exist.'}, status=404)
 
         return JsonResponse({'error': 'Unsupported method'}, status=405)
+
+    except Exception as e:
+        return JsonResponse({'error': str(e)}, status=500)
+
+@api_view(['POST'])
+@authentication_classes([JWTAuthentication, SessionAuthentication])
+@permission_classes([IsAuthenticated])
+def likes(request, post_id):
+    try:
+        user = request.user
+        from apps.posts.models import Posts
+        from db.graph.graph_models import Post as GraphPost, User as GraphUser
+
+        # Fetch relational post
+        try:
+            post = Posts.objects.get(id=post_id)
+        except Posts.DoesNotExist:
+            return JsonResponse({'message': 'Post not found'}, status=404)
+
+        # Fetch graph user & post
+        graph_user = GraphUser.nodes.get_or_none(email=user.email)
+        graph_post = GraphPost.nodes.get_or_none(post_id=str(post_id))
+
+        if not graph_user or not graph_post:
+            return JsonResponse({'message': 'Graph user or post not found'}, status=404)
+
+        if graph_user.likes.is_connected(graph_post):
+            return JsonResponse({'message': 'Already liked'}, status=409)
+
+        graph_user.likes.connect(graph_post)
+        return JsonResponse({'message': 'Post liked'}, status=200)
 
     except Exception as e:
         return JsonResponse({'error': str(e)}, status=500)
