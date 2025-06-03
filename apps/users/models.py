@@ -82,7 +82,7 @@ class UserSkills(models.Model):
     skill = models.ForeignKey('Skills', models.DO_NOTHING)
 
     class Meta:
-        managed = False
+        # managed = False
         db_table = 'user_skills'
 
 
@@ -91,7 +91,7 @@ class UserInterests(models.Model):
     tag = models.ForeignKey(Tags, models.DO_NOTHING, db_column='tag_id')
 
     class Meta:
-        managed = False
+        # managed = False
         db_table = 'user_interests'
         unique_together = (('user', 'tag'),)
 
@@ -111,5 +111,5 @@ class Skills(models.Model):
     name = models.CharField(unique=True, max_length=50)
 
     class Meta:
-        managed = False
+        # managed = False
         db_table = 'skills'

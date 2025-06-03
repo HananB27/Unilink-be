@@ -21,6 +21,7 @@ from django.urls import path, include
 from django.contrib.auth import views as auth_views
 from rest_framework_simplejwt.views import TokenRefreshView
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/users/', include('apps.users.urls')),
