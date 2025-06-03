@@ -21,14 +21,14 @@ async def get_user_from_token(token):
         payload = jwt.decode(token, settings.SECRET_KEY, algorithms=["HS256"], options={"verify_exp": False})
         user_id = payload.get("user_id") or payload.get("id")
 
-        # 🔁 Use async-safe database call
+        #Use async-safe database call
         user = await sync_to_async(User.objects.get)(id=user_id)
         return user
 
     except (jwt.ExpiredSignatureError, jwt.InvalidTokenError):
-        print("❌ Invalid or expired token.")
+        print("Invalid or expired token.")
     except User.DoesNotExist:
-        print("❌ User not found.")
+        print("User not found.")
 
     return None
 
@@ -45,7 +45,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
         self.other_user = self.scope["url_route"]["kwargs"]["username"]
 
         if not self.user:
-            print("❌ Invalid or missing token. Rejecting WebSocket connection.")
+            print("Invalid or missing token. Rejecting WebSocket connection.")
             await self.close()
             return
 
@@ -65,13 +65,13 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
     async def disconnect(self, close_code):
         if hasattr(self, "room_group_name"):
-            print(f"❌ [DISCONNECT] {self.user} left {self.room_group_name}")
+            print(f"[DISCONNECT] {self.user} left {self.room_group_name}")
             await self.channel_layer.group_discard(
                 self.room_group_name,
                 self.channel_name
             )
         else:
-            print(f"❌ [DISCONNECT] {self.user} (unauthenticated or early disconnect)")
+            print(f"[DISCONNECT] {self.user} (unauthenticated or early disconnect)")
 
     async def receive(self, text_data=None, bytes_data=None):
         try:
@@ -111,11 +111,11 @@ class ChatConsumer(AsyncWebsocketConsumer):
             )
         except ObjectDoesNotExist as e:
             await self.send(text_data=json.dumps({"error": "User not found."}))
-            print(f"❌ [DB ERROR] User not found: {e}")
+            print(f"[DB ERROR] User not found: {e}")
             await self.close()
         except Exception as e:
             await self.send(text_data=json.dumps({"error": "Internal server error"}))
-            print("❌ [UNHANDLED ERROR] in receive():")
+            print("[UNHANDLED ERROR] in receive():")
             traceback.print_exc()
             await self.close()
 
