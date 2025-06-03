@@ -141,15 +141,19 @@ def create_department(request):
         if request.method == 'POST':
             name = request.POST.get('name')
             university_id = request.POST.get('university_id')
+            university_email = request.POST.get('university_email')
             profile_picture = request.FILES.get('profile_picture')
+            email = request.POST.get('email')
 
             if not name or not university_id or not profile_picture:
                 return JsonResponse({'error':'invalid request'}, status=400)
 
             university = Universities.objects.get(id=university_id)
-            uniGraph = University.nodes.get(name=university.name)
+            uniGraph = University.nodes.get_or_none(email=university_email)
+            if not uniGraph:
+                return JsonResponse({'error': 'University node not found in Neo4j'}, status=404)
 
-            depGraph = Department(name=name, profile_picture=profile_picture).save()
+            depGraph = Department(name=name, profile_picture=profile_picture, email=email).save()
             depGraph.belongs_to.connect(uniGraph)
 
             department = Departments.objects.create(

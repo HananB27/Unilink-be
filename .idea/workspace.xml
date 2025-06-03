@@ -4,14 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="78c6d013-6d55-4d8c-ac1e-fdbb8eb7f529" name="Changes" comment="add gemini and embed data into a vector">
+    <list default="true" id="78c6d013-6d55-4d8c-ac1e-fdbb8eb7f529" name="Changes" comment="add interested in">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+
       <change beforePath="$PROJECT_DIR$/apps/users/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/users/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/users/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/users/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/users/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/users/views.py" afterDir="false" />
 
       <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,9 +45,24 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/HananB27/Unilink-be.git&quot;,
-    &quot;accountId&quot;: &quot;a62ab27d-6899-4246-8d27-cadba8b5c51c&quot;
+
+    &quot;accountId&quot;: &quot;e1bfa3e2-aa52-4f3e-a20f-81a6d4e792b9&quot;
+  },
+  &quot;recentNewPullRequestHead&quot;: {
+    &quot;server&quot;: {
+      &quot;useHttp&quot;: false,
+      &quot;host&quot;: &quot;github.com&quot;,
+      &quot;port&quot;: null,
+      &quot;suffix&quot;: null
+    },
+    &quot;owner&quot;: &quot;HananB27&quot;,
+    &quot;repository&quot;: &quot;Unilink-be&quot;
+
   }
 }</component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/.venv/lib/python3.12/site-packages/django/contrib/auth/base_user.py" root0="SKIP_INSPECTION" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 1
 }</component>
@@ -68,7 +83,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.keymap",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
     "vue.rearranger.settings.migration": "true"
 
   }
@@ -117,12 +132,9 @@
       <workItem from="1748253545917" duration="2085000" />
       <workItem from="1748259496501" duration="13896000" />
       <workItem from="1748377806464" duration="2649000" />
-      <workItem from="1748430609932" duration="65570000" />
-      <workItem from="1748561705841" duration="4593000" />
-      <workItem from="1748886232405" duration="1371000" />
-      <workItem from="1748887626926" duration="3005000" />
-      <workItem from="1748903591431" duration="3241000" />
 
+      <workItem from="1748430609932" duration="68078000" />
+      <workItem from="1748909153383" duration="83000" />
     </task>
     <task id="LOCAL-00001" summary="Init">
       <option name="closed" value="true" />
@@ -228,7 +240,15 @@
       <option name="project" value="LOCAL" />
       <updated>1748906042438</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="add interested in">
+      <option name="closed" value="true" />
+      <created>1748907971139</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1748907971139</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -247,7 +267,8 @@
     <MESSAGE value="post creation" />
     <MESSAGE value="user relations" />
     <MESSAGE value="add gemini and embed data into a vector" />
-    <option name="LAST_COMMIT_MESSAGE" value="add gemini and embed data into a vector" />
+    <MESSAGE value="add interested in" />
+    <option name="LAST_COMMIT_MESSAGE" value="add interested in" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

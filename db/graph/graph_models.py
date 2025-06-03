@@ -35,6 +35,7 @@ class Post(StructuredNode):
 class Department(OfficialAccount):
     belongs_to = RelationshipTo('University', 'BELONGS_TO')
     posts = RelationshipTo('Post', 'POSTED')
+    email = StringProperty(required=True, unique_index=True)
 
 class User(StructuredNode):
     uid = UniqueIdProperty()
@@ -43,8 +44,11 @@ class User(StructuredNode):
     email = StringProperty(unique_index=True, required=False)
 
     affiliated_with = RelationshipTo('University', 'AFFILIATED_WITH')
-    employed_at = RelationshipTo('Company', 'EMPLOYED_AT')
+    employed_at_company = RelationshipTo('Company', 'EMPLOYED_AT')
+    employed_at_university = RelationshipTo('University', 'EMPLOYED_AT')
+    employed_at_department = RelationshipTo('Department', 'EMPLOYED_AT')
     interested_in = RelationshipTo('Tag', 'INTERESTED_IN')
     posted = RelationshipTo('Post', 'POSTED')
+    likes = RelationshipTo('Post', 'LIKES')
     connected_with = RelationshipTo('User', 'CONNECTED_WITH')
     works_in_department = RelationshipTo('Department', 'WORKS_IN_DEPARTMENT')

@@ -17,4 +17,6 @@ urlpatterns = [
     path('remove_friend/<str:target_email>/', views.remove_friend, name='remove_friend'),
     path('interested_in/<str:tag_name>/', views.user_interest_toggle, name='user_interest_toggle'),
 
+
+    path('likes/<int:post_id>/', views.likes, name='like'),
 ]
