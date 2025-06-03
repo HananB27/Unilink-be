@@ -1,18 +1,55 @@
 import json
 import traceback
+from urllib.parse import parse_qs
+
+import jwt
 from channels.generic.websocket import AsyncWebsocketConsumer
 from asgiref.sync import sync_to_async
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ObjectDoesNotExist
 
+from Unilink_be import settings
 from .models import Message
 
 User = get_user_model()
 
+async def get_user_from_token(token):
+    if not token:
+        return None
+
+    try:
+        payload = jwt.decode(token, settings.SECRET_KEY, algorithms=["HS256"], options={"verify_exp": False})
+        user_id = payload.get("user_id") or payload.get("id")
+
+        # 🔁 Use async-safe database call
+        user = await sync_to_async(User.objects.get)(id=user_id)
+        return user
+
+    except (jwt.ExpiredSignatureError, jwt.InvalidTokenError):
+        print("❌ Invalid or expired token.")
+    except User.DoesNotExist:
+        print("❌ User not found.")
+
+    return None
+
+
+
 class ChatConsumer(AsyncWebsocketConsumer):
     async def connect(self):
-        self.user = self.scope["user"]
+        query_string = self.scope["query_string"].decode()
+        query_params = parse_qs(query_string)
+        token = query_params.get("token", [None])[0]  # Extract first match if it exists
+
+        self.user = await get_user_from_token(token)
+        print(self.user)
         self.other_user = self.scope["url_route"]["kwargs"]["username"]
+
+        if not self.user:
+            print("❌ Invalid or missing token. Rejecting WebSocket connection.")
+            await self.close()
+            return
+
+        self.scope["user"] = self.user
 
         # Build a consistent room name using both usernames
         self.room_name = f"{min(self.user.username, self.other_user)}__{max(self.user.username, self.other_user)}"
@@ -27,11 +64,14 @@ class ChatConsumer(AsyncWebsocketConsumer):
         await self.accept()
 
     async def disconnect(self, close_code):
-        print(f"❌ [DISCONNECT] {self.user} left {self.room_group_name}")
-        await self.channel_layer.group_discard(
-            self.room_group_name,
-            self.channel_name
-        )
+        if hasattr(self, "room_group_name"):
+            print(f"❌ [DISCONNECT] {self.user} left {self.room_group_name}")
+            await self.channel_layer.group_discard(
+                self.room_group_name,
+                self.channel_name
+            )
+        else:
+            print(f"❌ [DISCONNECT] {self.user} (unauthenticated or early disconnect)")
 
     async def receive(self, text_data=None, bytes_data=None):
         try:
